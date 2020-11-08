@@ -1,0 +1,43 @@
+<form #PremiumCalcForm="ngForm">
+  <div class="panel">
+    <div class="panel-heading text-center text-primary">
+      <h2 class="panel-title">Insurance Premium Calculator</h2>
+    </div>
+    <div class="panel panel-primary jumbotron">
+      <div class="panel-heading text-primary">
+        <h3 class="panel-title">Premium Details</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label [class.green-icon]="nameControl.valid" [class.red-icon]="nameControl.invalid && nameControl.touched"> Name</label>
+          <input required id="name" type="text" name="name" [(ngModel)]="name" class="form-control" #nameControl="ngModel" />
+        </div>
+        <div class="form-group">
+          <label [class.green-icon]="ageControl.valid" [class.red-icon]="ageControl.invalid && ageControl.touched">Age</label>
+          <input required id="age" name="age" [(ngModel)]="age" type="number" class="form-control" #ageControl="ngModel" />
+        </div>
+        <div class="form-group">
+          <label [class.green-icon]="dob.valid" [class.red-icon]="dob.invalid && dob.touched">Date of Birth</label>
+          <input required id="dateOfBirth" type="date" name="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" #dob="ngModel"/>
+        </div>
+        <div class="form-group">
+          <label [class.green-icon]="occupationControl.valid" [class.red-icon]="occupationControl.invalid && occupationControl.touched">Occupation</label>
+          <select required id="occupation" name="occupation" [(ngModel)]="occupation" class="form-control" (change)="OccupationChanged($event)" #occupationControl="ngModel">
+            <option *ngFor="let occupation of _occupationRatings" [value]="occupation.occupationId">{{occupation.occupation}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label [class.green-icon]="sum.valid" [class.red-icon]="sum.invalid && sum.touched">Death - Sum Insured</label>
+          <input required id="sumInsured" name="sumInsured" [(ngModel)]="sumInsured" type="number" class="form-control" #sum="ngModel" />
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" (click)="CalculatePremium()" [disabled]="PremiumCalcForm.invalid">Calculate Premium</button>
+        <div>
+          <label><b>Insurance Premium: </b></label>
+          <input id="insurancePremium" type="text" name="insurancePremium" [(ngModel)]="insurancePreminum" disabled="disabled" class="form-control" />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
